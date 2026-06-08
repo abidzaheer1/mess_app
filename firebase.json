@@ -1,0 +1,6 @@
+{
+  "firestore": {
+    "rules": "mess_mobile/firebase/firestore.rules",
+    "indexes": "mess_mobile/firebase/firestore.indexes.json"
+  }
+}

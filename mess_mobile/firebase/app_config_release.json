@@ -1,0 +1,11 @@
+{
+  "minBuildAndroid": 1,
+  "minBuildIos": 1,
+  "latestBuildAndroid": 1,
+  "latestBuildIos": 1,
+  "minVersionLabel": "1.0.0",
+  "latestVersionLabel": "1.0.0",
+  "storeUrlAndroid": "https://play.google.com/store/apps/details?id=com.alphamess.mess_mobile",
+  "storeUrlIos": "https://apps.apple.com/app/idYOUR_APP_ID",
+  "releaseNotes": "Initial public release."
+}

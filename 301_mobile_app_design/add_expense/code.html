@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alpha Mess - Add Expense</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "surface-variant": "#d3e4fe",
+                        "inverse-primary": "#b8c4ff",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-primary-fixed": "#001453",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#6b4200",
+                        "outline": "#757684",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-secondary": "#ffffff",
+                        "primary": "#00288e",
+                        "on-surface-variant": "#444653",
+                        "secondary-fixed": "#6ffbbe",
+                        "outline-variant": "#c4c5d5",
+                        "surface-tint": "#3755c3",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#002113",
+                        "on-primary-fixed-variant": "#173bab",
+                        "secondary": "#006c49",
+                        "secondary-fixed-dim": "#4edea3",
+                        "surface-container-low": "#eff4ff",
+                        "on-primary-container": "#a8b8ff",
+                        "on-tertiary-container": "#ffa929",
+                        "surface-container": "#e5eeff",
+                        "surface-bright": "#f8f9ff",
+                        "surface": "#f8f9ff",
+                        "error": "#ba1a1a",
+                        "tertiary": "#4c2e00",
+                        "inverse-surface": "#213145",
+                        "primary-fixed": "#dde1ff",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "on-surface": "#0b1c30",
+                        "surface-container-high": "#dce9ff",
+                        "secondary-container": "#6cf8bb",
+                        "on-background": "#0b1c30",
+                        "tertiary-fixed": "#ffddb8",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#cbdbf5",
+                        "surface-container-highest": "#d3e4fe",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#1e40af",
+                        "on-tertiary-fixed": "#2a1700",
+                        "background": "#f8f9ff",
+                        "on-secondary-container": "#00714d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "2.5rem",
+                        "xs": "0.25rem",
+                        "sm": "0.5rem",
+                        "md": "1rem",
+                        "unit": "4px",
+                        "lg": "1.5rem",
+                        "margin-mobile": "1rem",
+                        "container-max": "1280px",
+                        "gutter": "1.5rem"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-xl">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-md py-sm bg-surface dark:bg-inverse-surface shadow-sm h-16">
+<div class="flex items-center gap-md cursor-pointer active:opacity-70">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">menu</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Alpha Mess</h1>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim cursor-pointer active:opacity-70">notifications</span>
+</div>
+</header>
+<!-- Content Canvas -->
+<main class="pt-20 px-margin-mobile md:px-xl max-w-container-max mx-auto">
+<!-- Page Header -->
+<div class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Add New Expense</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Log your mess expenditures accurately for shared settlements.</p>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-12 gap-lg items-start">
+<!-- Main Form Column -->
+<div class="md:col-span-8 space-y-lg">
+<!-- Core Details Card -->
+<section class="bg-surface-container-lowest rounded-xl p-lg shadow-[0px_4px_12px_rgba(30,64,175,0.05)] border border-outline-variant/30">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="font-label-lg text-label-lg text-primary">Expense Title</label>
+<input class="w-full bg-surface border border-outline-variant rounded-lg p-md focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-md text-body-md" placeholder="e.g. Weekly Grocery Run" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-lg text-label-lg text-primary">Category</label>
+<select class="w-full bg-surface border border-outline-variant rounded-lg p-md focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-md text-body-md appearance-none">
+<option>Groceries</option>
+<option>Utilities</option>
+<option>Dining</option>
+<option>Maintenance</option>
+<option>Miscellaneous</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Dynamic Items Section -->
+<section class="bg-surface-container-lowest rounded-xl p-lg shadow-[0px_4px_12px_rgba(30,64,175,0.05)] border border-outline-variant/30">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Add Items</h3>
+<button class="flex items-center gap-xs text-primary font-label-lg text-label-lg hover:underline transition-all cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+                            Add Row
+                        </button>
+</div>
+<div class="space-y-sm">
+<!-- Item Row 1 -->
+<div class="flex flex-col md:flex-row gap-sm items-center bg-surface-container-low p-sm rounded-lg group">
+<div class="w-full md:flex-1">
+<input class="w-full bg-transparent border-none focus:ring-0 font-body-md text-body-md" placeholder="Item Name" type="text" value="Fresh Vegetables"/>
+</div>
+<div class="w-full md:w-32 flex items-center bg-white rounded border border-outline-variant px-sm">
+<span class="text-on-surface-variant text-label-sm mr-xs">$</span>
+<input class="w-full bg-transparent border-none focus:ring-0 font-body-md text-body-md text-right" placeholder="0.00" type="number" value="24.50"/>
+</div>
+<button class="text-error opacity-0 group-hover:opacity-100 transition-opacity p-xs" type="button">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<!-- Item Row 2 -->
+<div class="flex flex-col md:flex-row gap-sm items-center bg-surface-container-low p-sm rounded-lg group">
+<div class="w-full md:flex-1">
+<input class="w-full bg-transparent border-none focus:ring-0 font-body-md text-body-md" placeholder="Item Name" type="text" value="Basmati Rice 5kg"/>
+</div>
+<div class="w-full md:w-32 flex items-center bg-white rounded border border-outline-variant px-sm">
+<span class="text-on-surface-variant text-label-sm mr-xs">$</span>
+<input class="w-full bg-transparent border-none focus:ring-0 font-body-md text-body-md text-right" placeholder="0.00" type="number" value="12.00"/>
+</div>
+<button class="text-error opacity-0 group-hover:opacity-100 transition-opacity p-xs" type="button">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Summary Footer for Items -->
+<div class="mt-lg pt-md border-t border-outline-variant flex justify-end items-baseline gap-md">
+<span class="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">Estimated Total</span>
+<span class="font-headline-lg text-headline-lg text-primary">$36.50</span>
+</div>
+</section>
+</div>
+<!-- Side Column: Upload & Actions -->
+<div class="md:col-span-4 space-y-lg">
+<!-- Upload Section -->
+<section class="bg-surface-container-lowest rounded-xl p-lg shadow-[0px_4px_12px_rgba(30,64,175,0.05)] border border-outline-variant/30">
+<label class="font-label-lg text-label-lg text-primary block mb-sm">Upload Invoice</label>
+<div class="relative group cursor-pointer border-2 border-dashed border-outline-variant hover:border-primary transition-colors rounded-xl overflow-hidden aspect-[4/5] flex flex-col items-center justify-center bg-surface-container-low p-md">
+<div class="flex flex-col items-center text-center gap-sm">
+<span class="material-symbols-outlined text-[48px] text-primary" data-weight="fill" style="font-variation-settings: 'FILL' 1;">upload_file</span>
+<div class="font-label-lg text-label-lg text-on-surface">Drag &amp; drop or click</div>
+<div class="font-body-md text-body-md text-on-surface-variant">Supports PDF, JPG, PNG</div>
+</div>
+<!-- Placeholder Background Image -->
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<img class="w-full h-full object-cover" data-alt="A clean, professional close-up of a paper receipt resting on a minimalist white desk. The lighting is soft and even, typical of a high-end corporate office setting. The receipt shows neat columns of text and numbers, representing an organized financial record. The overall aesthetic is bright, clear, and trustworthy in a modern light-mode style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKx9TDaW8Y-H6cdnpDHn2vt6w5uBRnrt7AD2f4JSD925f5Fk2s9n3BcfwXGcHM4jfiUpNyKm3W_x_mnJg-ayw46IQtRzUUEU98hByIsS92sf7FsngJ54X48RoO7tX3Nq_xBYg26l6iw1_SYDvcQe-F6wyrwdraBYQBICQ_0sqpcT9fuJwTMU1fLYS59JM3YBGzpuqB4PwpfBwG6Pdf20nDcuifCfJ6FD_uqhqYUyHgtayi5DFi3mhjAO9MHnvnnk0ULFYJ_enewnNq"/>
+</div>
+</div>
+</section>
+<!-- Actions Section -->
+<div class="flex flex-col gap-md">
+<button class="w-full bg-primary text-on-primary font-headline-md text-headline-md py-md rounded-xl shadow-lg hover:bg-primary-container transition-all active:scale-95 duration-200" type="submit">
+                        Submit Expense
+                    </button>
+<button class="w-full border border-primary text-primary font-label-lg text-label-lg py-md rounded-xl hover:bg-surface-container-high transition-colors active:scale-95 duration-200" type="button">
+                        Save as Draft
+                    </button>
+</div>
+<!-- Guidance Note -->
+<div class="bg-tertiary-fixed text-on-tertiary-fixed p-md rounded-xl flex gap-sm">
+<span class="material-symbols-outlined text-[20px]">info</span>
+<p class="font-body-md text-body-md">Ensure your invoice is clearly visible for automated audit verification.</p>
+</div>
+</div>
+</form>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-sm py-sm bg-surface dark:bg-inverse-surface shadow-lg h-16 md:hidden">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-lg py-xs cursor-pointer active:scale-95 duration-200 hover:text-primary transition-all">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-full px-lg py-xs cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-sm text-label-sm">Expenses</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-lg py-xs cursor-pointer active:scale-95 duration-200 hover:text-primary transition-all">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-sm text-label-sm">Members</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-lg py-xs cursor-pointer active:scale-95 duration-200 hover:text-primary transition-all">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</div>
+</nav>
+</body></html>

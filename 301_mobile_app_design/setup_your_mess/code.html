@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Setup Your Room - Alpha Mess</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "surface-variant": "#d3e4fe",
+                        "inverse-primary": "#b8c4ff",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-primary-fixed": "#001453",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#6b4200",
+                        "outline": "#757684",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-secondary": "#ffffff",
+                        "primary": "#00288e",
+                        "on-surface-variant": "#444653",
+                        "secondary-fixed": "#6ffbbe",
+                        "outline-variant": "#c4c5d5",
+                        "surface-tint": "#3755c3",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#002113",
+                        "on-primary-fixed-variant": "#173bab",
+                        "secondary": "#006c49",
+                        "secondary-fixed-dim": "#4edea3",
+                        "surface-container-low": "#eff4ff",
+                        "on-primary-container": "#a8b8ff",
+                        "on-tertiary-container": "#ffa929",
+                        "surface-container": "#e5eeff",
+                        "surface-bright": "#f8f9ff",
+                        "surface": "#f8f9ff",
+                        "error": "#ba1a1a",
+                        "tertiary": "#4c2e00",
+                        "inverse-surface": "#213145",
+                        "primary-fixed": "#dde1ff",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "on-surface": "#0b1c30",
+                        "surface-container-high": "#dce9ff",
+                        "secondary-container": "#6cf8bb",
+                        "on-background": "#0b1c30",
+                        "tertiary-fixed": "#ffddb8",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#cbdbf5",
+                        "surface-container-highest": "#d3e4fe",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#1e40af",
+                        "on-tertiary-fixed": "#2a1700",
+                        "background": "#f8f9ff",
+                        "on-secondary-container": "#00714d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "2.5rem",
+                        "xs": "0.25rem",
+                        "sm": "0.5rem",
+                        "md": "1rem",
+                        "unit": "4px",
+                        "lg": "1.5rem",
+                        "margin-mobile": "1rem",
+                        "container-max": "1280px",
+                        "gutter": "1.5rem"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-md py-sm bg-surface dark:bg-inverse-surface shadow-sm">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim cursor-pointer active:opacity-70">menu</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Alpha Mess</h1>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-outline-variant cursor-pointer active:opacity-70">notifications</span>
+</div>
+</header>
+<main class="flex-1 flex items-center justify-center pt-xl px-margin-mobile">
+<div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-lg py-xl">
+<!-- Hero Illustration/Context Section -->
+<div class="hidden md:flex flex-col justify-center pr-xl">
+<h2 class="font-display-lg text-display-lg text-primary mb-md">Welcome to organized living.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-xl">
+                    Alpha Mess helps you track shared expenses, meal rotations, and room finances with corporate-level transparency. Get started by joining an existing room or creating a new one.
+                </p>
+<div class="relative w-full aspect-video rounded-xl overflow-hidden shadow-xl bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A clean, modern co-working space or communal living room with minimalist furniture, high-key natural lighting, and a professional atmosphere. The scene uses a palette of soft whites and deep blues to reflect a corporate modernism aesthetic, emphasizing order, efficiency, and community trust. The mood is calm and productive." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBE91ZoVh8FrmVQORAQHXlYApOaGMf8K5LX39PR4QCFnlQzZ2RkNHjgYWO45f_AMW8scf5DnUsCSeUqn5HsBd7Xj5rkETYXTef2AtWio26LBveqMKmYspFJ9rZGFTmjmEP3X3r0ZkpEc90yxo7adlMnM5e7Ys384xpEu1BYkXFeZOjIv_WOdI3hqqnkwe0poPXcUfKm83bS_8XWO0pDpnFeppRk_MKxLk4IGCBlse9sgDF3NtmwkYhoRA9bdqrLHc2fRUFA6P980tN"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
+</div>
+</div>
+<!-- Interaction Section -->
+<div class="flex flex-col gap-lg">
+<!-- Option 1: Join a Mess -->
+<div class="bg-surface-container-lowest p-xl rounded-xl shadow-[0px_4px_12px_rgba(30,64,175,0.05)] border border-outline-variant/30">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-primary">group_add</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Join a Mess</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg">Already have a room? Enter the 6-digit code shared by your room admin.</p>
+<div class="flex flex-col gap-sm">
+<label class="font-label-lg text-label-lg text-on-surface">Joining Code</label>
+<div class="flex gap-sm">
+<input class="flex-1 border border-outline-variant rounded-lg px-md py-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none font-headline-md text-headline-md tracking-widest uppercase" placeholder="e.g. XM-4502" type="text"/>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-label-lg text-label-lg hover:shadow-lg transition-all active:scale-95">Join</button>
+</div>
+</div>
+</div>
+<!-- Option 2: Create a New Mess -->
+<div class="bg-surface-container-lowest p-xl rounded-xl shadow-[0px_4px_12px_rgba(30,64,175,0.05)] border border-outline-variant/30 flex flex-col items-center text-center">
+<div class="w-16 h-16 bg-secondary-container rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-on-secondary-container text-4xl">add_home</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm">Start Fresh</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg">Create a new room, set up your budget rules, and invite your roommates.</p>
+<button class="w-full bg-secondary text-on-secondary px-lg py-md rounded-lg font-label-lg text-label-lg hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined">create_new_folder</span>
+                        Create a New Mess
+                    </button>
+</div>
+<!-- Success State / Modal (Shown conditionally in real app) -->
+<!-- We render it as a task-focused overlay to demonstrate the "Success state" mentioned in requirements -->
+<div class="bg-surface-bright border-2 border-primary/20 p-xl rounded-xl shadow-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 p-sm">
+<span class="bg-primary text-on-primary text-[10px] px-sm py-xs rounded-full font-bold uppercase tracking-tighter">Admin Status</span>
+</div>
+<div class="flex items-center gap-sm mb-lg">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Mess Created!</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">You are now the administrator of <b>Alpha Mess #102</b>. Share the details below with your members.</p>
+<div class="flex flex-col md:flex-row gap-lg items-center bg-surface-container-low p-md rounded-lg">
+<!-- QR Code Placeholder -->
+<div class="w-32 h-32 bg-white p-sm rounded-lg shadow-sm flex items-center justify-center">
+<div class="w-full h-full border-4 border-on-surface/5 flex flex-col items-center justify-center text-on-surface-variant opacity-40">
+<span class="material-symbols-outlined text-4xl">qr_code_2</span>
+<span class="text-[8px] font-bold">SCAN TO JOIN</span>
+</div>
+</div>
+<div class="flex-1 w-full">
+<div class="mb-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant block mb-xs">Joining Code</span>
+<div class="flex items-center justify-between bg-white border border-outline-variant px-md py-sm rounded-lg">
+<span class="font-headline-md text-headline-md text-primary tracking-widest">ALPH-99</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">content_copy</span>
+</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-label-lg text-label-lg py-sm rounded-lg flex items-center justify-center gap-sm hover:bg-primary hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined">share</span>
+                                Share Joining Code
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Suppressed for focused onboarding journey) -->
+<!-- Not rendering per "Shell Visibility & Relevance" rule for Transactional/Onboarding screens -->
+</body></html>

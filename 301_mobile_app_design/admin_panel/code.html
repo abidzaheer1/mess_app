@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#653e00",
+                    "surface-variant": "#d3e4fe",
+                    "inverse-primary": "#b8c4ff",
+                    "tertiary-fixed-dim": "#ffb95f",
+                    "on-secondary-fixed-variant": "#005236",
+                    "on-primary-fixed": "#001453",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#6b4200",
+                    "outline": "#757684",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-secondary": "#ffffff",
+                    "primary": "#00288e",
+                    "on-surface-variant": "#444653",
+                    "secondary-fixed": "#6ffbbe",
+                    "outline-variant": "#c4c5d5",
+                    "surface-tint": "#3755c3",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#002113",
+                    "on-primary-fixed-variant": "#173bab",
+                    "secondary": "#006c49",
+                    "secondary-fixed-dim": "#4edea3",
+                    "surface-container-low": "#eff4ff",
+                    "on-primary-container": "#a8b8ff",
+                    "on-tertiary-container": "#ffa929",
+                    "surface-container": "#e5eeff",
+                    "surface-bright": "#f8f9ff",
+                    "surface": "#f8f9ff",
+                    "error": "#ba1a1a",
+                    "tertiary": "#4c2e00",
+                    "inverse-surface": "#213145",
+                    "primary-fixed": "#dde1ff",
+                    "primary-fixed-dim": "#b8c4ff",
+                    "on-surface": "#0b1c30",
+                    "surface-container-high": "#dce9ff",
+                    "secondary-container": "#6cf8bb",
+                    "on-background": "#0b1c30",
+                    "tertiary-fixed": "#ffddb8",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#cbdbf5",
+                    "surface-container-highest": "#d3e4fe",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#1e40af",
+                    "on-tertiary-fixed": "#2a1700",
+                    "background": "#f8f9ff",
+                    "on-secondary-container": "#00714d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "xl": "2.5rem",
+                    "xs": "0.25rem",
+                    "sm": "0.5rem",
+                    "md": "1rem",
+                    "unit": "4px",
+                    "lg": "1.5rem",
+                    "margin-mobile": "1rem",
+                    "container-max": "1280px",
+                    "gutter": "1.5rem"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9ff;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+        .shadow-soft {
+            box-shadow: 0px 4px 12px rgba(30, 64, 175, 0.05);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-md py-sm bg-surface dark:bg-inverse-surface shadow-sm">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-70" data-icon="menu">menu</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Alpha Mess</h1>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:opacity-70" data-icon="notifications">notifications</span>
+<div class="w-8 h-8 rounded-full border-2 border-white shadow-sm overflow-hidden bg-primary flex items-center justify-center">
+<span class="text-white text-xs font-bold">JD</span>
+</div>
+</div>
+</header>
+<!-- NavigationDrawer (Desktop Only) -->
+<aside class="hidden md:flex fixed inset-y-0 left-0 z-[60] flex flex-col py-lg bg-surface-container-low dark:bg-inverse-surface h-full w-80 rounded-r-xl shadow-xl mt-16">
+<div class="px-md mb-xl flex items-center gap-md">
+<div class="w-12 h-12 rounded-full border-2 border-white shadow-sm overflow-hidden bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="person">person</span>
+</div>
+<div>
+<p class="font-headline-md text-headline-md font-bold text-primary">John Doe</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Admin - Alpha Mess</p>
+</div>
+</div>
+<nav class="flex flex-col gap-xs">
+<div class="text-on-surface-variant mx-sm px-md py-sm flex items-center gap-md hover:bg-surface-container-high cursor-pointer transition-all rounded-full">
+<span class="material-symbols-outlined" data-icon="room_preferences">room_preferences</span>
+<span class="font-body-md text-body-md">Switch Room</span>
+</div>
+<div class="text-on-surface-variant mx-sm px-md py-sm flex items-center gap-md hover:bg-surface-container-high cursor-pointer transition-all rounded-full">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+<span class="font-body-md text-body-md">Grocery Rotation</span>
+</div>
+<div class="text-on-surface-variant mx-sm px-md py-sm flex items-center gap-md hover:bg-surface-container-high cursor-pointer transition-all rounded-full">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-body-md text-body-md">Monthly Reports</span>
+</div>
+<div class="bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary font-semibold rounded-full mx-sm px-md py-sm flex items-center gap-md cursor-pointer transition-all">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</div>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-24 px-4 md:pl-80 md:pr-12 md:pb-12 max-w-7xl mx-auto">
+<div class="mb-xl">
+<h2 class="font-display-lg text-display-lg text-primary">Admin Settings</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-xs">Manage your mess identity, financial settings, and room logistics.</p>
+</div>
+<div class="bento-grid">
+<!-- General Settings Section -->
+<section class="col-span-12 md:col-span-4 bg-white rounded-xl p-lg shadow-soft flex flex-col gap-lg border border-surface-container">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="tune">tune</span>
+<h3 class="font-headline-md text-headline-md">General Settings</h3>
+</div>
+<div class="flex flex-col gap-md">
+<div>
+<label class="font-label-lg text-label-lg text-on-surface-variant mb-xs block">Mess Currency</label>
+<select class="w-full p-md border border-outline-variant rounded-lg font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-surface-bright">
+<option value="USD">USD - US Dollar ($)</option>
+<option selected="" value="INR">INR - Indian Rupee (₹)</option>
+<option value="EUR">EUR - Euro (€)</option>
+<option value="GBP">GBP - British Pound (£)</option>
+</select>
+</div>
+<div>
+<label class="font-label-lg text-label-lg text-on-surface-variant mb-xs block">Mess Name</label>
+<input class="w-full p-md border border-outline-variant rounded-lg font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="text" value="Alpha Mess"/>
+</div>
+<button class="bg-primary text-on-primary font-label-lg text-label-lg py-md rounded-lg shadow-sm hover:opacity-90 transition-opacity">Save Changes</button>
+</div>
+</section>
+<!-- Room Management Section -->
+<section class="col-span-12 md:col-span-8 bg-white rounded-xl p-lg shadow-soft border border-surface-container">
+<div class="flex items-center justify-between mb-lg">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="meeting_room">meeting_room</span>
+<h3 class="font-headline-md text-headline-md">Room Management</h3>
+</div>
+<div class="flex items-center gap-xs px-md py-xs bg-secondary-container rounded-full text-on-secondary-container">
+<span class="material-symbols-outlined text-[18px]" data-icon="check_circle">check_circle</span>
+<span class="font-label-sm text-label-sm">Room Active</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-xl items-center">
+<div class="space-y-lg">
+<div class="p-lg bg-surface-container-low rounded-xl border-2 border-dashed border-outline-variant text-center">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-sm">Joining Code</p>
+<div class="flex items-center justify-center gap-md">
+<span class="font-display-lg text-display-lg text-primary tracking-[0.2em]">ALPH-24</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" data-icon="content_copy">content_copy</span>
+</div>
+</div>
+<div class="space-y-sm">
+<p class="font-body-md text-body-md text-on-surface-variant">Share this code or QR with new roommates to join this mess workspace.</p>
+<button class="w-full border border-primary text-primary font-label-lg text-label-lg py-md rounded-lg hover:bg-surface-container-low transition-colors flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined" data-icon="ios_share">ios_share</span>
+                                Revoke &amp; Refresh Code
+                            </button>
+</div>
+</div>
+<div class="flex flex-col items-center justify-center p-md bg-white border border-surface-container-high rounded-xl shadow-sm">
+<div class="w-48 h-48 bg-white p-md rounded-lg border border-outline-variant flex items-center justify-center relative">
+<img alt="QR Code" class="w-full h-full opacity-80" data-alt="A professional high-contrast QR code centered on a clean white card. The design is minimalist and modern, following a corporate light-mode aesthetic with deep blue primary accents. Soft studio lighting and sharp focus emphasize the digital utility of the object. The composition is balanced and elegant, suggesting secure technology and effortless room management." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfFg1380XlJe1PILy8eDZhToO02ym9OtDQIF2CPHmQ222YgvXiwSbZlvRn4obZ2tB8n42g3o9VsKEbxkpvrP0giDFXA2xAO5hJbJ937EBzN_-VvIDp81aJIvx5Uon9t74pY0r2Yx2OIMJ2bFOrTEpAQdQYv8JMcYdkxxGMxQq7EEyYAmoeziJrDB1qs0NJeE7ZXciTOH1IjnXig5Trp8e1e73lhIc7lN8nqhCY2lpnH5tPY-UELj3qKDekOMoFVWR_YWRgEIodeZTu"/>
+</div>
+<p class="mt-md font-label-lg text-label-lg text-on-surface-variant">Scan to Join</p>
+</div>
+</div>
+</section>
+<!-- Grocery Rotation Section -->
+<section class="col-span-12 bg-white rounded-xl p-lg shadow-soft border border-surface-container">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-md mb-xl">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="autorenew">autorenew</span>
+<div>
+<h3 class="font-headline-md text-headline-md">Grocery Purchase Rotation</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Set the order for members to manage food inventory purchases.</p>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="font-label-sm text-label-sm">Cycle:</span>
+<span class="px-md py-xs bg-surface-container-high rounded-full font-label-sm text-label-sm">Weekly</span>
+</div>
+<button class="bg-primary text-on-primary font-label-lg text-label-lg px-lg py-md rounded-lg shadow-sm">Add Slot</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-md">
+<!-- Rotation Card 1 (Active) -->
+<div class="flex flex-col border-2 border-primary bg-primary-container/10 p-md rounded-xl relative">
+<div class="absolute -top-3 left-4 px-md py-xs bg-primary text-on-primary rounded-full font-label-sm text-label-sm">Current</div>
+<div class="flex items-center justify-between mb-md">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold">JD</div>
+<div class="flex flex-col items-end">
+<span class="material-symbols-outlined text-on-surface-variant cursor-grab" data-icon="drag_indicator">drag_indicator</span>
+</div>
+</div>
+<p class="font-label-lg text-label-lg text-on-surface">John Doe</p>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Started Oct 1</p>
+<div class="flex justify-between items-center mt-auto pt-md border-t border-primary/20">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="arrow_back">arrow_back</span>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+<!-- Rotation Card 2 -->
+<div class="flex flex-col border border-surface-container bg-white p-md rounded-xl shadow-soft hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-md">
+<div class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-white font-bold">AS</div>
+<div class="flex flex-col items-end">
+<span class="material-symbols-outlined text-on-surface-variant cursor-grab" data-icon="drag_indicator">drag_indicator</span>
+</div>
+</div>
+<p class="font-label-lg text-label-lg text-on-surface">Anita Sharma</p>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Next in Line</p>
+<div class="flex justify-between items-center mt-auto pt-md border-t border-surface-container-high">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="arrow_back">arrow_back</span>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+<!-- Rotation Card 3 -->
+<div class="flex flex-col border border-surface-container bg-white p-md rounded-xl shadow-soft hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-md">
+<div class="w-10 h-10 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container font-bold">MK</div>
+<div class="flex flex-col items-end">
+<span class="material-symbols-outlined text-on-surface-variant cursor-grab" data-icon="drag_indicator">drag_indicator</span>
+</div>
+</div>
+<p class="font-label-lg text-label-lg text-on-surface">Mark Kim</p>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Waiting</p>
+<div class="flex justify-between items-center mt-auto pt-md border-t border-surface-container-high">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="arrow_back">arrow_back</span>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+<!-- Rotation Card 4 -->
+<div class="flex flex-col border border-surface-container bg-white p-md rounded-xl shadow-soft hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-md">
+<div class="w-10 h-10 rounded-full bg-inverse-surface flex items-center justify-center text-white font-bold">RV</div>
+<div class="flex flex-col items-end">
+<span class="material-symbols-outlined text-on-surface-variant cursor-grab" data-icon="drag_indicator">drag_indicator</span>
+</div>
+</div>
+<p class="font-label-lg text-label-lg text-on-surface">Rahul Varma</p>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Waiting</p>
+<div class="flex justify-between items-center mt-auto pt-md border-t border-surface-container-high">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="arrow_back">arrow_back</span>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-sm py-sm bg-surface dark:bg-inverse-surface shadow-lg">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-lg py-xs cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-lg py-xs cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-sm text-label-sm">Expenses</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-lg py-xs cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-sm text-label-sm">Members</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-full px-lg py-xs cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</div>
+</nav>
+</body></html>

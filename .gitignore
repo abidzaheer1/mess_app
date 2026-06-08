@@ -1,0 +1,30 @@
+# Secrets — never commit
+**/.env
+**/.env.*
+**/key.properties
+**/*.jks
+**/*.keystore
+**/local.properties
+
+# Dependencies & build outputs
+**/node_modules/
+mess_mobile/build/
+mess_mobile/.dart_tool/
+mess_mobile/.flutter-plugins-dependencies
+firebase/functions/node_modules/
+
+# Firebase / tooling
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+*.log
+
+# OS & IDE
+.DS_Store
+Thumbs.db
+.idea/
+*.iml
+.vscode/
+
+# Flutter generated (per-package gitignores also apply)
+mess_mobile/**/GeneratedPluginRegistrant.*

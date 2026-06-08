@@ -1,0 +1,169 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function authed() {
+      return request.auth != null;
+    }
+
+    function isSelf(uid) {
+      return request.auth.uid == uid;
+    }
+
+    function messMemberDoc(messId) {
+      return /databases/$(database)/documents/messes/$(messId)/members/$(request.auth.uid);
+    }
+
+    function messDoc(messId) {
+      return /databases/$(database)/documents/messes/$(messId);
+    }
+
+    function isMessMember(messId) {
+      return authed() && exists(messMemberDoc(messId));
+    }
+
+    function memberRole(messId) {
+      return get(messMemberDoc(messId)).data.get('role', 'member');
+    }
+
+    function isMessCreator(messId) {
+      return authed() && get(messDoc(messId)).data.get('createdBy', '') == request.auth.uid;
+    }
+
+    function isMessAdmin(messId) {
+      return isMessCreator(messId)
+        || (isMessMember(messId) && memberRole(messId) == 'admin');
+    }
+
+    function isDutyFieldsUpdate() {
+      return request.resource.data.diff(resource.data).affectedKeys()
+        .hasOnly(['currentDuty', 'rotationOrder', 'rotationUpdatedAt', 'lastDutyDate', 'dutyInitialized']);
+    }
+
+    match /appConfig/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /users/{uid} {
+      allow read: if authed();
+      allow create: if authed() && isSelf(uid);
+      allow update: if authed() && isSelf(uid);
+      allow delete: if false;
+    }
+
+    match /messInvites/{code} {
+      allow read: if authed();
+      allow create, update: if authed();
+      allow delete: if false;
+    }
+
+    match /messes/{messId} {
+
+      match /joinAlerts/{alertId} {
+        allow read, delete: if isMessAdmin(messId);
+        allow create: if authed()
+          && request.resource.data.uid == request.auth.uid;
+        allow update: if false;
+      }
+
+      match /joinRequests/{requestId} {
+        allow read: if isMessAdmin(messId)
+          || (authed() && (resource == null || resource.data.uid == request.auth.uid));
+
+        allow create: if authed()
+          && request.resource.data.uid == request.auth.uid
+          && request.resource.data.status == 'pending';
+
+        allow update: if isMessAdmin(messId)
+          || (authed()
+            && resource.data.uid == request.auth.uid
+            && resource.data.status == 'pending'
+            && request.resource.data.status == 'rejected');
+
+        allow delete: if false;
+      }
+
+      match /dutySwapRequests/{requestId} {
+        allow read: if isMessMember(messId)
+          && (resource.data.fromUid == request.auth.uid
+            || resource.data.toUid == request.auth.uid
+            || isMessAdmin(messId));
+
+        allow create: if isMessMember(messId)
+          && request.resource.data.fromUid == request.auth.uid
+          && request.resource.data.status == 'pending';
+
+        allow update: if isMessMember(messId) && (
+          isMessAdmin(messId)
+          || (resource.data.toUid == request.auth.uid
+            && resource.data.status == 'pending'
+            && request.resource.data.status in ['accepted', 'rejected'])
+          || (resource.data.fromUid == request.auth.uid
+            && resource.data.status == 'pending'
+            && request.resource.data.status == 'cancelled')
+        );
+
+        allow delete: if false;
+      }
+
+      match /members/{memberId} {
+        allow read: if isMessMember(messId)
+          || (authed() && memberId == request.auth.uid);
+
+        allow create: if authed();
+
+        allow update: if isMessMember(messId)
+          && (
+            memberId == request.auth.uid ||
+            memberRole(messId) == 'admin'
+          );
+
+        allow delete: if false;
+      }
+
+      match /messages/{messageId} {
+        allow read: if isMessMember(messId);
+        allow create: if isMessMember(messId)
+          && (
+            request.resource.data.senderUid == request.auth.uid
+            || request.resource.data.senderUid == 'system'
+          );
+        allow update: if false;
+        allow delete: if isMessAdmin(messId);
+      }
+
+      match /events/{eventId} {
+        allow read: if isMessMember(messId);
+        allow create: if isMessMember(messId)
+          && request.resource.data.createdBy == request.auth.uid;
+        allow update: if isMessMember(messId);
+        allow delete: if isMessAdmin(messId)
+          || (authed() && resource.data.createdBy == request.auth.uid);
+      }
+
+      match /expenses/{expenseId} {
+        allow read, create: if isMessMember(messId);
+        allow update, delete: if isMessMember(messId)
+          && (memberRole(messId) == 'admin' || resource.data.paidByUid == request.auth.uid);
+      }
+
+      match /notifications/{notifId} {
+        allow read, delete: if isMessMember(messId)
+          && resource.data.targetUid == request.auth.uid;
+        allow create: if isMessMember(messId);
+        allow update: if false;
+      }
+
+      allow read: if isMessMember(messId);
+      allow create: if authed();
+
+      allow update: if isMessMember(messId) && (
+        isMessAdmin(messId) ||
+        isDutyFieldsUpdate()
+      );
+
+      allow delete: if false;
+    }
+  }
+}
