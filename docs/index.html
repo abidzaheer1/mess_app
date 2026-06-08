@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Alpha Mess — shared living made simple. Track expenses, settle monthly bills, chat with housemates, and manage grocery duty." />
+  <title>Alpha Mess — Mess management for your home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%2300288E' width='100' height='100' rx='22'/><text y='68' x='50' text-anchor='middle' font-size='52' fill='white' font-family='sans-serif' font-weight='700'>α</text></svg>" />
+</head>
+<body>
+  <div class="bg-mesh" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="logo" href="#top">
+      <span class="logo-mark">α</span>
+      <span>Alpha Mess</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#download">Download</a>
+      <a href="https://github.com/abidzaheer1/mess_app" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+    <a class="btn btn-sm btn-primary" href="#download">Get the app</a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-badge">Built for shared homes &amp; student messes</div>
+      <h1>Run your mess like a <em>team</em>, not a spreadsheet.</h1>
+      <p class="hero-lead">
+        Alpha Mess keeps expenses fair, chats connected, and grocery duty on rotation —
+        so everyone knows who paid what and what happens next.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="#download" id="hero-download">Download free</a>
+        <a class="btn btn-ghost btn-lg" href="https://github.com/abidzaheer1/mess_app" target="_blank" rel="noopener">View source</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>Equal split</strong><span>Monthly settlement</span></div>
+        <div><strong>Voice + text</strong><span>Mess chat</span></div>
+        <div><strong>Multi-currency</strong><span>AED, PKR, INR &amp; more</span></div>
+      </div>
+    </section>
+
+    <section class="preview">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="mock-header">Dashboard</div>
+          <div class="mock-card primary">
+            <span class="mock-label">Total monthly expenses</span>
+            <span class="mock-value">AED 2,450</span>
+            <div class="mock-bars"><span></span><span></span><span class="active"></span><span></span></div>
+          </div>
+          <div class="mock-row">
+            <div class="mock-chip green">You receive AED 120</div>
+            <div class="mock-chip">Grocery duty: Ahmed</div>
+          </div>
+          <div class="mock-list">
+            <div class="mock-item"><span>🛒</span> Weekly groceries <b>AED 340</b></div>
+            <div class="mock-item"><span>💡</span> DEWA bill <b>AED 89</b></div>
+            <div class="mock-item"><span>🍽️</span> Friday dinner <b>AED 156</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="features">
+      <p class="section-tag">Why Alpha Mess</p>
+      <h2>Everything your housemates need in one app</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon">💰</div>
+          <h3>Smart expenses</h3>
+          <p>Log groceries, utilities, and meals with receipt photos. See weekly spending charts and recent activity at a glance.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Monthly settlement</h3>
+          <p>Equal-split math done for you. Know your share, who owes the admin, and export a PDF report for the group.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3>Mess chat</h3>
+          <p>Text messages and hold-to-record voice notes. Unread badges so nobody misses an update.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">🛒</div>
+          <h3>Grocery rotation</h3>
+          <p>Daily duty rotation, swap requests with accept/decline, and reminders for whoever is on duty today.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">🎉</div>
+          <h3>Events</h3>
+          <p>Plan outings or group meals, track estimated cost per person, and attach event expenses.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">🔔</div>
+          <h3>Live notifications</h3>
+          <p>New expenses, chat messages, join requests, and swap alerts — delivered while you use the app.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">👥</div>
+          <h3>Members &amp; invites</h3>
+          <p>Invite codes, admin approval for join requests, and role management for your mess.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">🔐</div>
+          <h3>Secure sign-in</h3>
+          <p>Email, Google sign-in, strong passwords, and forgot-password recovery via Firebase.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="how">
+      <p class="section-tag">How it works</p>
+      <h2>Up and running in minutes</h2>
+      <ol class="steps">
+        <li><span>1</span>Create or join a mess with an invite code</li>
+        <li><span>2</span>Add expenses as they happen — snap a receipt optional</li>
+        <li><span>3</span>Chat, rotate grocery duty, plan events together</li>
+        <li><span>4</span>Review monthly settlement and settle with the admin</li>
+      </ol>
+    </section>
+
+    <section id="download" class="download">
+      <p class="section-tag">Get Alpha Mess</p>
+      <h2>Download the latest release</h2>
+      <p class="download-lead">Pick your platform. Android installs directly from GitHub Releases. iOS uses the App Store when published.</p>
+
+      <div id="release-status" class="release-status" hidden></div>
+
+      <div class="download-grid">
+        <article class="download-card" id="card-android">
+          <div class="platform-icon android" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 9.48l1.84-3.18c.16-.28.04-.62-.3-.62H5.86c-.34 0-.46.34-.3.62L7.4 9.48C5.59 10.68 4.5 12.7 4.5 15v3.75c0 .41.34.75.75.75h13.5c.41 0 .75-.34.75-.75V15c0-2.3-1.09-4.32-2.9-5.52zM9.75 17.25c-.41 0-.75-.34-.75-.75s.34-.75.75-.75.75.34.75.75-.34.75-.75.75zm4.5 0c-.41 0-.75-.34-.75-.75s.34-.75.75-.75.75.34.75.75-.34.75-.75.75z"/></svg>
+          </div>
+          <h3>Android</h3>
+          <p class="version" id="android-version">Checking releases…</p>
+          <a class="btn btn-primary btn-block" id="btn-android" href="#" aria-disabled="true">Download APK</a>
+          <p class="download-note">Enable “Install unknown apps” for your browser or file manager.</p>
+        </article>
+
+        <article class="download-card" id="card-ios">
+          <div class="platform-icon ios" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          </div>
+          <h3>iPhone &amp; iPad</h3>
+          <p class="version" id="ios-version">App Store</p>
+          <a class="btn btn-primary btn-block" id="btn-ios" href="#" aria-disabled="true">Coming soon</a>
+          <p class="download-note">TestFlight link will appear here after App Store submission.</p>
+        </article>
+
+        <article class="download-card" id="card-github">
+          <div class="platform-icon github" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </div>
+          <h3>All releases</h3>
+          <p class="version" id="github-version">GitHub</p>
+          <a class="btn btn-ghost btn-block" id="btn-github" href="https://github.com/abidzaheer1/mess_app/releases" target="_blank" rel="noopener">Browse releases</a>
+          <p class="download-note">Release notes, older versions, and source code.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Alpha Mess · Firebase-backed · <a href="https://github.com/abidzaheer1/mess_app">abidzaheer1/mess_app</a></p>
+    <p class="footer-sub">Questions or bugs? Open an issue on GitHub.</p>
+  </footer>
+
+  <script src="releases.js"></script>
+</body>
+</html>
