@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'web_notifications_stub.dart'
-    if (dart.library.js_interop) 'web_notifications.dart';
+    if (dart.library.html) 'web_notifications.dart';
 
 /// Local / browser alerts when new Firestore notification docs arrive.
 class LocalNotificationService {

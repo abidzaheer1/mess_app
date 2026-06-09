@@ -2,8 +2,10 @@
   const REPO = 'abidzaheer1/mess_app';
   const API = 'https://api.github.com/repos/' + REPO + '/releases/latest';
   const RELEASES_URL = 'https://github.com/' + REPO + '/releases';
+  const IOS_BUILD_GUIDE =
+    'https://github.com/' + REPO + '/blob/main/mess_mobile/PUBLISHING.md#3-ios-app-store--testflight';
 
-  // Optional: set when App Store / TestFlight is live
+  // Set when TestFlight or App Store is live
   const IOS_STORE_URL = '';
 
   const btnAndroid = document.getElementById('btn-android');
@@ -13,13 +15,15 @@
   const githubVersion = document.getElementById('github-version');
   const releaseStatus = document.getElementById('release-status');
 
-  function findApk(assets) {
+  function findAsset(assets, extensions) {
     if (!assets || !assets.length) return null;
     return assets.find(function (a) {
-      return a.name && a.name.toLowerCase().endsWith('.apk');
-    }) || assets.find(function (a) {
-      return a.content_type === 'application/vnd.android.package-archive';
-    }) || null;
+      if (!a.name) return false;
+      const lower = a.name.toLowerCase();
+      return extensions.some(function (ext) {
+        return lower.endsWith(ext);
+      });
+    });
   }
 
   function setNoRelease() {
@@ -27,6 +31,10 @@
     btnAndroid.textContent = 'Build instructions on GitHub';
     btnAndroid.href = RELEASES_URL;
     btnAndroid.removeAttribute('aria-disabled');
+    iosVersion.textContent = 'No release yet';
+    btnIos.textContent = 'iOS build guide';
+    btnIos.href = IOS_BUILD_GUIDE;
+    btnIos.removeAttribute('aria-disabled');
     githubVersion.textContent = 'Create a release to enable downloads';
     releaseStatus.hidden = false;
     releaseStatus.className = 'release-status warn';
@@ -34,21 +42,29 @@
       'No GitHub Release found yet. Publish a release with an APK attached and this page will show a download button automatically.';
   }
 
-  function setupIos() {
+  function setupIosFromRelease(release, tag) {
     if (IOS_STORE_URL) {
-      iosVersion.textContent = 'Available on App Store';
+      iosVersion.textContent = tag + ' · App Store';
       btnIos.textContent = 'Download on App Store';
       btnIos.href = IOS_STORE_URL;
       btnIos.removeAttribute('aria-disabled');
-    } else {
-      iosVersion.textContent = 'Coming soon';
-      btnIos.textContent = 'Coming soon';
-      btnIos.href = '#';
-      btnIos.setAttribute('aria-disabled', 'true');
+      return;
     }
-  }
 
-  setupIos();
+    const ipa = findAsset(release.assets, ['.ipa']);
+    if (ipa) {
+      iosVersion.textContent = tag + ' · ' + formatSize(ipa.size);
+      btnIos.textContent = 'Download ' + ipa.name;
+      btnIos.href = ipa.browser_download_url;
+      btnIos.removeAttribute('aria-disabled');
+      return;
+    }
+
+    iosVersion.textContent = tag + ' · build on Mac';
+    btnIos.textContent = 'iOS build instructions';
+    btnIos.href = IOS_BUILD_GUIDE;
+    btnIos.removeAttribute('aria-disabled');
+  }
 
   fetch(API)
     .then(function (res) {
@@ -63,9 +79,10 @@
       if (!release) return;
 
       const tag = release.tag_name || release.name || 'Latest';
-      const apk = findApk(release.assets);
+      const apk = findAsset(release.assets, ['.apk']);
 
       githubVersion.textContent = tag + ' · ' + (release.published_at || '').slice(0, 10);
+      setupIosFromRelease(release, tag);
 
       if (apk) {
         androidVersion.textContent = tag + ' · ' + formatSize(apk.size);
@@ -74,7 +91,8 @@
         btnAndroid.removeAttribute('aria-disabled');
         releaseStatus.hidden = false;
         releaseStatus.className = 'release-status';
-        releaseStatus.textContent = 'Latest release: ' + tag + (release.name ? ' — ' + release.name : '');
+        releaseStatus.textContent =
+          'Latest release: ' + tag + (release.name ? ' — ' + release.name : '');
       } else {
         androidVersion.textContent = tag + ' (no APK attached)';
         btnAndroid.textContent = 'View release assets';

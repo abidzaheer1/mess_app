@@ -7,7 +7,7 @@ import 'package:record/record.dart';
 
 import '../theme/app_theme.dart';
 import 'web_blob_reader_stub.dart'
-    if (dart.library.js_interop) 'web_blob_reader.dart';
+    if (dart.library.html) 'web_blob_reader.dart';
 
 class VoiceRecording {
   const VoiceRecording({

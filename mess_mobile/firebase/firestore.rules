@@ -119,7 +119,8 @@ service cloud.firestore {
             memberRole(messId) == 'admin'
           );
 
-        allow delete: if false;
+        allow delete: if isMessMember(messId)
+          && (memberId == request.auth.uid || memberRole(messId) == 'admin');
       }
 
       match /messages/{messageId} {

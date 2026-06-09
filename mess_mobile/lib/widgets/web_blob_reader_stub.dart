@@ -1,3 +1,3 @@
-import 'dart:js_interop';
+import 'dart:typed_data';
 
-Future<Uint8List?> readWebBlobUrl(String url) => throw UnsupportedError('Web blob reader is web-only.');
+Future<Uint8List?> readWebBlobUrl(String url) async => null;

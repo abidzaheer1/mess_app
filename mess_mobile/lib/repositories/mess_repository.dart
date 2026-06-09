@@ -691,6 +691,88 @@ class MessRepository {
     await batch.commit();
   }
 
+  /// Removes the signed-in user from a mess and clears their profile link.
+  Future<void> leaveMess({
+    required String uid,
+    required String messId,
+  }) async {
+    final authUid = currentUser?.uid;
+    if (authUid == null || authUid != uid) {
+      throw StateError('You must be signed in to leave a mess.');
+    }
+
+    final memberSnap = await _db.doc('messes/$messId/members/$uid').get();
+    if (!memberSnap.exists) {
+      throw StateError('You are not a member of this mess.');
+    }
+
+    final membersSnap = await _db.collection('messes/$messId/members').get();
+    final adminCount = membersSnap.docs
+        .where((d) => (d.data()['role'] as String?) == Roles.admin)
+        .length;
+    final otherMembers =
+        membersSnap.docs.where((d) => d.id != uid).length;
+    final isAdmin = (memberSnap.data()?['role'] as String?) == Roles.admin;
+
+    if (isAdmin && adminCount <= 1 && otherMembers > 0) {
+      throw StateError(
+        'You are the only admin. Promote another member to admin before leaving.',
+      );
+    }
+
+    final messSnap = await _db.doc('messes/$messId').get();
+    final mess =
+        messSnap.exists ? Mess.fromDoc(messId, messSnap.data()!) : null;
+
+    final batch = _db.batch();
+    batch.delete(_db.doc('messes/$messId/members/$uid'));
+    batch.set(
+      _db.doc('users/$uid'),
+      <String, dynamic>{
+        'messId': FieldValue.delete(),
+        'role': FieldValue.delete(),
+        'pendingJoin': FieldValue.delete(),
+      },
+      SetOptions(merge: true),
+    );
+
+    if (mess != null && mess.rotationOrder.contains(uid)) {
+      final newOrder =
+          mess.rotationOrder.where((id) => id != uid).toList(growable: false);
+      final messUpdates = <String, dynamic>{
+        'rotationOrder': newOrder,
+        'rotationUpdatedAt': DateTime.now().millisecondsSinceEpoch,
+      };
+
+      if (mess.currentDuty?.assigneeUid == uid) {
+        if (newOrder.isNotEmpty) {
+          final nextSnap =
+              await _db.doc('messes/$messId/members/${newOrder.first}').get();
+          if (nextSnap.exists) {
+            final assignee =
+                Member.fromMap(nextSnap.data()!, newOrder.first);
+            messUpdates['currentDuty'] = <String, dynamic>{
+              'assigneeUid': assignee.uid,
+              'assigneeName': assignee.displayName,
+              'type': mess.currentDuty?.type ?? 'grocery',
+              'description':
+                  mess.currentDuty?.description ?? 'Grocery duty for today.',
+              'date': _todayDateStr(),
+            };
+          } else {
+            messUpdates['currentDuty'] = FieldValue.delete();
+          }
+        } else {
+          messUpdates['currentDuty'] = FieldValue.delete();
+        }
+      }
+
+      batch.update(_db.doc('messes/$messId'), messUpdates);
+    }
+
+    await batch.commit();
+  }
+
   Future<void> updateMessDuty(String messId, DutyInfo? duty) {
     final ref = _db.doc('messes/$messId');
     if (duty == null) {
