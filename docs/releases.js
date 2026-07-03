@@ -1,9 +1,9 @@
 (function () {
   const REPO = 'abidzaheer1/mess_app';
+  const RELEASES_BASE = 'https://github.com/' + REPO + '/releases';
   const API = 'https://api.github.com/repos/' + REPO + '/releases/latest';
-  const RELEASES_URL = 'https://github.com/' + REPO + '/releases';
-  const IOS_BUILD_GUIDE =
-    'https://github.com/' + REPO + '/blob/main/mess_mobile/PUBLISHING.md#3-ios-app-store--testflight';
+  const LATEST_APK = RELEASES_BASE + '/latest/download/app-release.apk';
+  const LATEST_IPA = RELEASES_BASE + '/latest/download/app-release.ipa';
 
   // Set when TestFlight or App Store is live
   const IOS_STORE_URL = '';
@@ -26,45 +26,71 @@
     });
   }
 
+  function enableAndroid(href, label, versionText) {
+    androidVersion.textContent = versionText;
+    btnAndroid.textContent = label;
+    btnAndroid.href = href;
+    btnAndroid.removeAttribute('aria-disabled');
+  }
+
+  function enableIos(href, label, versionText) {
+    iosVersion.textContent = versionText;
+    btnIos.textContent = label;
+    btnIos.href = href;
+    btnIos.removeAttribute('aria-disabled');
+  }
+
+  function setFallbackDownloads() {
+    enableAndroid(LATEST_APK, 'Download app-release.apk', 'Latest release');
+    if (IOS_STORE_URL) {
+      enableIos(IOS_STORE_URL, 'Download on App Store', 'App Store');
+    } else {
+      enableIos(LATEST_IPA, 'Download app-release.ipa', 'Latest release');
+    }
+    githubVersion.textContent = 'GitHub Releases';
+    releaseStatus.hidden = false;
+    releaseStatus.className = 'release-status';
+    releaseStatus.textContent =
+      'Direct download links are active. Android installs from the APK. iPhone/iPad: download the IPA on a computer, then install with AltStore or Sideloadly (free Apple ID).';
+  }
+
   function setNoRelease() {
     androidVersion.textContent = 'No release yet';
-    btnAndroid.textContent = 'Build instructions on GitHub';
-    btnAndroid.href = RELEASES_URL;
+    btnAndroid.textContent = 'View releases on GitHub';
+    btnAndroid.href = RELEASES_BASE;
     btnAndroid.removeAttribute('aria-disabled');
     iosVersion.textContent = 'No release yet';
-    btnIos.textContent = 'iOS build guide';
-    btnIos.href = IOS_BUILD_GUIDE;
+    btnIos.textContent = 'View releases on GitHub';
+    btnIos.href = RELEASES_BASE;
     btnIos.removeAttribute('aria-disabled');
     githubVersion.textContent = 'Create a release to enable downloads';
     releaseStatus.hidden = false;
     releaseStatus.className = 'release-status warn';
     releaseStatus.textContent =
-      'No GitHub Release found yet. Publish a release with an APK attached and this page will show a download button automatically.';
+      'No GitHub Release found yet. Publish a release with APK and IPA attached.';
   }
 
   function setupIosFromRelease(release, tag) {
     if (IOS_STORE_URL) {
-      iosVersion.textContent = tag + ' · App Store';
-      btnIos.textContent = 'Download on App Store';
-      btnIos.href = IOS_STORE_URL;
-      btnIos.removeAttribute('aria-disabled');
+      enableIos(IOS_STORE_URL, 'Download on App Store', tag + ' · App Store');
       return;
     }
 
     const ipa = findAsset(release.assets, ['.ipa']);
     if (ipa) {
-      iosVersion.textContent = tag + ' · ' + formatSize(ipa.size);
-      btnIos.textContent = 'Download ' + ipa.name;
-      btnIos.href = ipa.browser_download_url;
-      btnIos.removeAttribute('aria-disabled');
+      enableIos(
+        ipa.browser_download_url,
+        'Download ' + ipa.name,
+        tag + ' · ' + formatSize(ipa.size)
+      );
       return;
     }
 
-    iosVersion.textContent = tag + ' · build on Mac';
-    btnIos.textContent = 'iOS build instructions';
-    btnIos.href = IOS_BUILD_GUIDE;
-    btnIos.removeAttribute('aria-disabled');
+    enableIos(LATEST_IPA, 'Download app-release.ipa', tag + ' · IPA pending');
   }
+
+  // Always wire direct latest/download links first so buttons work even if the API is slow.
+  setFallbackDownloads();
 
   fetch(API)
     .then(function (res) {
@@ -80,32 +106,40 @@
 
       const tag = release.tag_name || release.name || 'Latest';
       const apk = findAsset(release.assets, ['.apk']);
+      const ipa = findAsset(release.assets, ['.ipa']);
 
       githubVersion.textContent = tag + ' · ' + (release.published_at || '').slice(0, 10);
       setupIosFromRelease(release, tag);
 
       if (apk) {
-        androidVersion.textContent = tag + ' · ' + formatSize(apk.size);
-        btnAndroid.textContent = 'Download ' + apk.name;
-        btnAndroid.href = apk.browser_download_url;
-        btnAndroid.removeAttribute('aria-disabled');
-        releaseStatus.hidden = false;
-        releaseStatus.className = 'release-status';
-        releaseStatus.textContent =
-          'Latest release: ' + tag + (release.name ? ' — ' + release.name : '');
+        enableAndroid(
+          apk.browser_download_url,
+          'Download ' + apk.name,
+          tag + ' · ' + formatSize(apk.size)
+        );
       } else {
-        androidVersion.textContent = tag + ' (no APK attached)';
-        btnAndroid.textContent = 'View release assets';
-        btnAndroid.href = release.html_url || RELEASES_URL;
-        btnAndroid.removeAttribute('aria-disabled');
-        releaseStatus.hidden = false;
+        enableAndroid(LATEST_APK, 'Download app-release.apk', tag + ' (no APK attached)');
+      }
+
+      releaseStatus.hidden = false;
+      releaseStatus.className = 'release-status';
+      if (apk && ipa) {
+        releaseStatus.textContent =
+          'Latest release ' +
+          tag +
+          ' — Android APK and iOS IPA ready. On iPhone: sideload the IPA with AltStore or Sideloadly.';
+      } else if (apk) {
         releaseStatus.className = 'release-status warn';
         releaseStatus.textContent =
-          'Release ' + tag + ' exists but has no .apk file. Attach app-release.apk to the GitHub Release.';
+          'Release ' + tag + ' has Android APK but no iOS IPA yet.';
+      } else {
+        releaseStatus.className = 'release-status warn';
+        releaseStatus.textContent =
+          'Release ' + tag + ' is missing download assets.';
       }
     })
     .catch(function () {
-      setNoRelease();
+      setFallbackDownloads();
     });
 
   function formatSize(bytes) {
