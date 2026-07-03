@@ -1,0 +1,41 @@
+name: Deploy web app to Netlify
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'mess_mobile/**'
+      - 'netlify.toml'
+      - 'scripts/netlify-build.sh'
+      - '.github/workflows/netlify.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Build Flutter web
+        working-directory: mess_mobile
+        run: |
+          flutter pub get
+          flutter build web --release --base-href "/"
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: mess_mobile/build/web
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: 'Deploy Alpha Mess web app'
+          enable-pull-request-comment: false
+          enable-commit-comment: false
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
