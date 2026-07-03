@@ -3,7 +3,7 @@
   const RELEASES_BASE = 'https://github.com/' + REPO + '/releases';
   const API = 'https://api.github.com/repos/' + REPO + '/releases/latest';
   const LATEST_APK = RELEASES_BASE + '/latest/download/app-release.apk';
-  const WEB_APP_URL = 'app/';
+  const WEB_APP_URL = 'https://mess.asxora.io/';
 
   // Set when TestFlight or App Store is live (overrides web app install button)
   const IOS_STORE_URL = '';
