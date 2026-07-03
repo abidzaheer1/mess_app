@@ -1,11 +1,11 @@
 {
-    "name": "mess_mobile",
-    "short_name": "mess_mobile",
+    "name": "Alpha Mess",
+    "short_name": "Alpha Mess",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#00288E",
+    "theme_color": "#00288E",
+    "description": "Mess management for your home — expenses, chat, and grocery duty.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

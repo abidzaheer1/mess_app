@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'docs/**'
+      - 'mess_mobile/**'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -25,9 +26,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Build Flutter web app
+        working-directory: mess_mobile
+        run: |
+          flutter pub get
+          flutter build web --release --base-href "/mess_app/app/"
+
+      - name: Assemble site (landing + installable web app)
+        run: |
+          rm -rf docs/app
+          mkdir -p docs/app
+          cp -r mess_mobile/build/web/* docs/app/
+
       - uses: actions/configure-pages@v5
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: docs
+
       - id: deployment
         uses: actions/deploy-pages@v4
