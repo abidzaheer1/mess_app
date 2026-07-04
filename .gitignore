@@ -28,3 +28,6 @@ Thumbs.db
 
 # Flutter generated (per-package gitignores also apply)
 mess_mobile/**/GeneratedPluginRegistrant.*
+
+# Local Netlify folder
+.netlify
