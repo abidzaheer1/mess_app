@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +20,11 @@ Future<void> main() async {
   initRecordWeb();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await LocalNotificationService.instance.init();
+
+  // Don't block first paint on web notification permission.
+  if (!kIsWeb) {
+    await LocalNotificationService.instance.init();
+  }
 
   final repo = MessRepository();
 
@@ -27,6 +34,10 @@ Future<void> main() async {
       child: const AlphaMessMobileApp(),
     ),
   );
+
+  if (kIsWeb) {
+    unawaited(LocalNotificationService.instance.init());
+  }
 }
 
 class AlphaMessMobileApp extends StatelessWidget {
