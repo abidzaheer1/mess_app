@@ -48,6 +48,18 @@ Pushes to `main` will then deploy via `.github/workflows/netlify.yml`.
 
 ---
 
+## Firebase Auth (required for sign-in)
+
+Add each web host to **Firebase Console → Authentication → Settings → Authorized domains**, or run:
+
+```powershell
+node scripts/update-firebase-auth-domains.mjs
+```
+
+Current domains include `mess.asxora.io`, `alpha-mess-app.netlify.app`, and `abidzaheer1.github.io`.
+
+---
+
 ## Live URLs
 
 | Platform | URL |
