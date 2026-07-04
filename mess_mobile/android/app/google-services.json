@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "588825672161-k6ekbba3mg4sm4e2tl2h7v3j9cqq7ifm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alphamess.mess_mobile",
+            "certificate_hash": "acc859e7a697dc6103a154899054a390cb82b7c2"
+          }
+        },
+        {
           "client_id": "588825672161-j3ndc3p5psijkq85eb610e12hj6kujo8.apps.googleusercontent.com",
           "client_type": 3
         }

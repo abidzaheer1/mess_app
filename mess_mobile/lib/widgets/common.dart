@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../theme/app_theme.dart';
 
@@ -31,6 +32,17 @@ String authErrorMessage(Object error) {
       default:
         return error.message ?? 'Sign-in failed (${error.code}).';
     }
+  }
+  if (error is PlatformException) {
+    final code = error.code;
+    if (code == 'sign_in_failed' || code == '10') {
+      return 'Google sign-in is not configured for this Android build. '
+          'Install the latest app release from GitHub and try again.';
+    }
+    if (code == 'network_error') {
+      return 'Network error. Check your connection and try again.';
+    }
+    return error.message ?? 'Sign-in failed ($code).';
   }
   if (error is FirebaseException) {
     if (error.code == 'permission-denied') {

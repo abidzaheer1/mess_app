@@ -21,6 +21,14 @@ class MessRepository {
 
   final FirebaseFirestore _db;
 
+  /// Web client ID from Firebase (required for Google Sign-In on Android/iOS).
+  static const _googleWebClientId =
+      '588825672161-j3ndc3p5psijkq85eb610e12hj6kujo8.apps.googleusercontent.com';
+
+  GoogleSignIn get _googleSignIn => GoogleSignIn(
+        serverClientId: kIsWeb ? null : _googleWebClientId,
+      );
+
   static final _rng = Random.secure();
 
   String _genInviteCode() {
@@ -59,7 +67,7 @@ class MessRepository {
     if (kIsWeb) {
       cred = await auth.FirebaseAuth.instance.signInWithPopup(auth.GoogleAuthProvider());
     } else {
-      final googleUser = await GoogleSignIn().signIn();
+      final googleUser = await _googleSignIn.signIn();
       if (googleUser == null) return false;
       final googleAuth = await googleUser.authentication;
       final credential = auth.GoogleAuthProvider.credential(
@@ -79,7 +87,7 @@ class MessRepository {
   Future<void> signOut() async {
     if (!kIsWeb) {
       try {
-        await GoogleSignIn().signOut();
+        await _googleSignIn.signOut();
       } catch (_) {}
     }
     await auth.FirebaseAuth.instance.signOut();
